@@ -6,10 +6,10 @@ on:
     branches:
       - main
 
-jobs:
-
-  env:
+env:
     CUSTOM_MESSAGE: "Hello from GitHub Actions!"
+
+jobs:
 
   basic-checkout:
     runs-on: ubuntu-latest
@@ -39,9 +39,9 @@ jobs:
       # Step 5: Check datetime, free disk space and memory usage
       - name: Current date and time
         run: |
-          echo "date"
-          echo "df -h"
-          echo "free -m"
+          echo "Current Date and Time: $(date)"
+          echo "Available Disk Space: $(df -h)"
+          echo "Memory Usage: $(free -m)"
 
       # Print custom environment varriable
       - name: Display custom message
