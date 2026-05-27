@@ -37,7 +37,7 @@ jobs:
           curl -f http://localhost:8080 || exit 1
 
           docker stop test-nginx
-          docekr rm test-nginx
+          docker rm test-nginx
 
       # Push Image
       - name: Push to DockerHub
