@@ -7,6 +7,10 @@ on:
       - main
 
 jobs:
+
+  env:
+    CUSTOM_MESSAGE: "Hello from GitHub Actions!"
+
   basic-checkout:
     runs-on: ubuntu-latest
     steps:
@@ -31,3 +35,19 @@ jobs:
           echo "Node version: $(node --version)"
           echo "Python version: $(python --version)"
           echo "Git version: $(git --version)"
+
+      # Step 5: Check datetime, free disk space and memory usage
+      - name: Current date and time
+        run: |
+          echo "date"
+          echo "df -h"
+          echo "free -m"
+
+      # Print custom environment varriable
+      - name: Display custom message
+        run: echo "$CUSTOM_MESSAGE"
+
+      # Coditionl Execution
+      - name: Conditional step
+        if: github.event_name == 'push'
+        run: echo "This waas triggered by a push event"
