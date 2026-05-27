@@ -32,18 +32,18 @@ jobs:
           docker run -d -p 8080:80 --name test-nginx mynginx:test
           sleep 5
           curl http://localhost:8080 | grep "Hello from GitHub Actions"
+          
+          # Health Check
+          curl -f http://localhost:8080 || exit 1
+
           docker stop test-nginx
+          docekr rm test-nginx
 
       # Push Image
       - name: Push to DockerHub
         run: |
           docker tag mynginx:test ${{ secrets.DOCKER_USERNAME }}/mynginx:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/mynginx:latest
-
-      # Check Health
-      - name: Health check
-        run: |
-          curl -f http://localhost:8080 || exit 1
 
       # Version Tag
       - name: Tag Version
