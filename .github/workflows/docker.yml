@@ -39,3 +39,13 @@ jobs:
         run: |
           docker tag mynginx:test ${{ secrets.DOCKER_USERNAME }}/mynginx:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/mynginx:latest
+
+      # Check Health
+      - name: Health check
+        run: |
+          curl -f http://localhost:8080 || exit 1
+
+      # Version Tag
+      - name: Tag Version
+        run: |
+          docker tag mynginx:test ${{ secrets.DOCKER_USERNAME }}/mynginx:${{ github.sha }}
